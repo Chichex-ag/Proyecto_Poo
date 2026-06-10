@@ -1,3 +1,5 @@
+from Usuario import Usuario
+
 class Estudiante(Usuario):
     def __init__(self, id_usuario, cedula, nombres, apellidos, correo, telefono, estado, contraseña, discapacidad=False):
         super().__init__(id_usuario, cedula, nombres, apellidos, correo, telefono, estado, contraseña)

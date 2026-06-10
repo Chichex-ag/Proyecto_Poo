@@ -22,3 +22,4 @@ class Administrador(Usuario, GestionReportes):
 
     def mostrar_rol(self):
         return "Administrador"
+    
