@@ -1,3 +1,6 @@
+from Usuario import Usuario
+from GestionReportes import GestionReportes
+
 class Docente(Usuario, GestionReportes):
     def __init__(self, id_usuario, cedula, nombres, apellidos, correo, telefono, estado, contraseña, titulo, especialidad):
         super().__init__(id_usuario, cedula, nombres, apellidos, correo, telefono, estado, contraseña)
