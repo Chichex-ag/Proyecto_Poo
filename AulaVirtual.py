@@ -1,7 +1,6 @@
 class AulaVirtual:
 
-    def __init__(self, id_aula: str, nombre: str, plataforma: str,
-                 url: str, capacidad_max: int = 100):
+    def __init__(self, id_aula: str, nombre: str, plataforma: str,url: str, capacidad_max: int = 100):
         self.__id_aula = id_aula
         self.__nombre = nombre
         self.__plataforma = plataforma     
