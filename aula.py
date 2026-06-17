@@ -1,41 +1,62 @@
+
 class Aula:
-    def __init__(self, id_aula, codigo, capacidad, estado):
-        self._id_aula = id_aula
-        self._codigo = codigo
-        self._capacidad = capacidad
-        self._estado = estado
+
+    def __init__(self, id_aula: str, nombre: str, capacidad: int = True):
+        self.__id_aula = id_aula                 
+        self.__nombre = nombre
+        self.__capacidad = capacidad
+        self.__disponible = True
+        self.__horarios_ocupados: list = []
+
+    # ── Propiedades ──────────────────────────────────────
+    @property
+    def id_aula(self) -> str:
+        return self.__id_aula
 
     @property
-    def id_aula(self):
-        return self._id_aula
-
-    @id_aula.setter
-    def id_aula(self, valor):
-        self._id_aula = valor
+    def nombre(self) -> str:
+        return self.__nombre
 
     @property
-    def codigo(self):
-        return self._codigo
-
-    @codigo.setter
-    def codigo(self, valor):
-        self._codigo = valor
-
-    @property
-    def capacidad(self):
-        return self._capacidad
+    def capacidad(self) -> int:
+        return self.__capacidad
 
     @capacidad.setter
-    def capacidad(self, valor):
-        self._capacidad = valor
+    def capacidad(self, valor: int):
+        if valor <= 0:
+            raise ValueError("La capacidad debe ser mayor a 0")
+        self.__capacidad = valor
 
     @property
-    def estado(self):
-        return self._estado
+    def edificio(self) -> str:
+        return self.__edificio
 
-    @estado.setter
-    def estado(self, valor):
-        self._estado = valor
+    @property
+    def tiene_proyector(self) -> bool:
+        return self.__tiene_proyector
 
-    def registrar_aula(self):
-        pass
+    @property
+    def disponible(self) -> bool:
+        return self.__disponible
+
+    # Metodo
+    def reservar(self, horario: str) -> bool:
+        if horario in self.__horarios_ocupados:
+            print(f"Aula {self.__codigo} ya ocupada en {horario}.")
+            return False
+        self.__horarios_ocupados.append(horario)
+        return True
+
+    def liberar(self, horario: str) -> bool:
+        if horario in self.__horarios_ocupados:
+            self.__horarios_ocupados.remove(horario)
+            return True
+        return False
+
+    def get_horarios_ocupados(self) -> list:
+        return list(self.__horarios_ocupados)
+
+    def es_apta_para(self, num_estudiantes: int) -> bool:
+        return self.__capacidad >= num_estudiantes
+
+

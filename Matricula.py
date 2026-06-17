@@ -1,44 +1,53 @@
+from datetime import date
+
+
 class Matricula:
-    def __init__(self, id_matricula, fecha, tipo, estado):
-        self._id_matricula = id_matricula
-        self._fecha = fecha
-        self._tipo = tipo
-        self._estado = estado
+
+    def __init__(self, estudiante, curso, periodo):
+        self.__id = id(self)
+        self.__estudiante = estudiante
+        self.__curso = curso
+        self.__periodo = periodo
+        self.__fecha_matricula = date.today()
+        self.__estado = "Activa"        # Activa | Retirada | Aprobada | Reprobada
 
     @property
-    def id_matricula(self):
-        return self._id_matricula
-
-    @id_matricula.setter
-    def id_matricula(self, valor):
-        self._id_matricula = valor
+    def id(self) -> int:
+        return self.__id
 
     @property
-    def fecha(self):
-        return self._fecha
-
-    @fecha.setter
-    def fecha(self, valor):
-        self._fecha = valor
+    def estudiante(self):
+        return self.__estudiante
 
     @property
-    def tipo(self):
-        return self._tipo
-
-    @tipo.setter
-    def tipo(self, valor):
-        self._tipo = valor
+    def curso(self):
+        return self.__curso
 
     @property
-    def estado(self):
-        return self._estado
+    def periodo(self):
+        return self.__periodo
 
-    @estado.setter
-    def estado(self, valor):
-        self._estado = valor
+    @property
+    def fecha_matricula(self) -> date:
+        return self.__fecha_matricula
 
-    def procesar_matricula(self):
-        pass
+    @property
+    def estado(self) -> str:
+        return self.__estado
 
-    def anular_matricula(self):
-        pass
+    # Metodos
+    def retirar(self):
+        if self.__estado == "Activa":
+            self.__estado = "Retirada"
+            print(f"  Matrícula #{self.__id} retirada.")
+        else:
+            print(f"  No se puede retirar. Estado actual: {self.__estado}")
+
+    def aprobar(self):
+        self.__estado = "Aprobada"
+
+    def reprobar(self):
+        self.__estado = "Reprobada"
+
+    def esta_activa(self) -> bool:
+        return self.__estado == "Activa"
